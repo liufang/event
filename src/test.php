@@ -25,20 +25,17 @@ FEvent::addTime(0.5, function($data) use($buf){
 
 //添加一个监听
 FEvent::addHttpListen(['29999'=>'127.0.0.1'], function($req){
-        echo __METHOD__, PHP_EOL;
-        echo "URI: ", $req->getUri(), PHP_EOL;
-        echo "\n >> Sending reply ...";
+        echo date('Y-m-d H:i:s') . "URI: ", $req->getUri();
+        echo " >> Sending reply ...\r\n";
         $buf = new \EventBuffer();
         $buf->add("test by fang, data.......");
         $req->sendReply(200, "OK", $buf);
-        echo "OK\n";
     },
 
      ['/test' => function($req) use ($buf){
     $buf->push('abc-' . time());
-    echo __METHOD__, PHP_EOL;
-    echo "URI: ", $req->getUri(), PHP_EOL;
-    echo "\n >> Sending reply ...";
+     echo date('Y-m-d H:i:s') . "URI: ", $req->getUri();
+     echo " >> Sending reply ...\r\n";
     $ebuf = new \EventBuffer();
     $ebuf->add('buf len:' . $buf->count() . "</br>");
     $ebuf->add("memory userage: " . FEvent::getMemoryUsage() . "</br>");
@@ -69,7 +66,7 @@ function($bev, $events, $std) {
         }
 
         echo "Closing, id:{$std->id}\n";
-        \FEvent::removeEv($std->id);
+        FEvent::removeEv($std->id);
     }
 }
 );

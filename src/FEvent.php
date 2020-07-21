@@ -111,28 +111,6 @@ class FEvent
             if(!$http->bind($host, $port)) {
                 exit('http listen fail, at:' . $host . '::' . $port . "\r\n");
             }
-
-            // $fd = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-            // if (!socket_set_option($fd, SOL_SOCKET, SO_REUSEADDR, 1000)) {
-            //     echo 'Unable to set option on socket: '. socket_strerror(socket_last_error()) . PHP_EOL;
-            // }
-            
-            // if (!\socket_bind($fd, $host, $port)) {
-            //     exit("socket_bind failed\n");
-            // }
-            // \socket_listen($fd, 0);
-            // \socket_set_nonblock($fd);
-
-            // $std->fd = $fd;
-
-            // if(!$http->accept($fd)) {
-            //     echo "Accept failed\n";
-            //     exit(1);
-            // }
-
-            // if(!$http->bind($host, $port)) {
-            //      exit('http listen fail, at:' . $host . '::' . $port . "\r\n");
-            // }
         }
 
         if(isset($options['max_body_size'])) {
@@ -170,7 +148,7 @@ class FEvent
             \EventBufferEvent::OPT_CLOSE_ON_FREE | \EventBufferEvent::OPT_DEFER_CALLBACKS,
             $readcb, $writecb, $eventcb, $std
         );
-        $bufEv->enable(Event::READ | Event::WRITE);
+        $bufEv->enable(\Event::READ | \Event::WRITE);
         $std->ev = $bufEv;
         self::addEv($std->id, $bufEv);
         return $std;
