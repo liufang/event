@@ -1,5 +1,5 @@
 {
-  "name": "fang/event",
+  "name": "xf/event",
   "type": "library",
   "description": "event for PHP 7.3",
   "keywords": ["log","logging"],
