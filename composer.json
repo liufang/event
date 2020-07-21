@@ -1,5 +1,5 @@
 {
-  "name": "xf/event",
+  "name": "xfphp/event",
   "type": "library",
   "description": "event for PHP 7.3",
   "keywords": ["log","logging"],
